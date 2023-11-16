@@ -1,0 +1,9 @@
+body {
+  justify-content: center;
+  background: linear-gradient(
+    113deg,
+    #2980b9 14.78%,
+    #3498db 54.27%,
+    #85c1e9 85.96%
+  );
+}
