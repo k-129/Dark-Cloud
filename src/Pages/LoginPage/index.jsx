@@ -32,8 +32,6 @@ const Form = styled.form`
   align-items: center;
 `;
 
-
-
 export default function LoginForm() {
   return (
     <LoginContainer>
