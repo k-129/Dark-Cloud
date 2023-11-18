@@ -11,8 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/auth.context";
 import authService from "../../Services/auth.service";
 
-import InputBox from "../../Components/InputBox/index";
 import InputButton from "../../Components/Button";
+import InputBox from "../../Components/InputBox/index";
 import Logo from "../../Components/Logo";
 
 const LoginContainer = styled.div`
@@ -46,7 +46,7 @@ const Form = styled.div`
 `;
 
 export default function LoginForm() {
-  const [user, setUser] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [loginIn, setLoginIn] = useState(false);
@@ -55,9 +55,10 @@ export default function LoginForm() {
 
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
-  const handleUser = (e) => {
-    setUser(e.target.value);
+  const handleUsername = (e) => {
+    setUsername(e.target.value);
   };
+
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
@@ -66,7 +67,7 @@ export default function LoginForm() {
     e.preventDefault();
     setLoginIn(true);
 
-    const requestBody = { user, password };
+    const requestBody = { username, password };
 
     authService
       .login(requestBody)
@@ -88,27 +89,20 @@ export default function LoginForm() {
         <form onSubmit={handleLoginSubmit}>
           <InputBox
             inputType="text"
-            inputName="user"
+            inputName="username"
             placeholderText="Whom may I address?"
-            value={handleUser}
+            value={username}
+            handleFunction={handleUsername}
           />
           <InputBox
             inputType="password"
             inputName="password"
             placeholderText="Magical Words"
-            value={handlePassword}
+            value={password}
+            handleFunction={handlePassword}
           />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}{" "}
-          <div>
-            {loginIn ? (
-              <InputButton buttonPlaceholder="Login" disabled={true} />
-            ) : (
-              <InputButton
-                buttonPlaceholder="Login"
-                type="submit"
-              />
-            )}
-          </div>
+          <InputButton buttonPlaceholder="Login" type="submit" />
         </form>
       </Form>
     </LoginContainer>
