@@ -5,6 +5,9 @@ import styled from "styled-components";
 
 export default function Button({ buttonPlaceholder }) {
   const InputButton = styled.button`
+    @media (max-width: 768px) {
+      background-color: red;
+    }
     width: 24vw;
     height: 7vh;
     border-radius: 50px;
@@ -14,7 +17,8 @@ export default function Button({ buttonPlaceholder }) {
     backdrop-filter: blur(20px);
     margin-bottom: 3vh;
     &:hover {
-      background-color: #3ea2e6; /* Change the background color on hover */
+      background-color: #3ea2e6;
+      border: none;
     }
   `;
   const ButtonText = styled.p`

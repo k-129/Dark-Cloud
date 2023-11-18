@@ -3,7 +3,12 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function InputBox({ inputType, inputName, placeholderText }) {
+export default function InputBox({
+  inputType,
+  inputName,
+  placeholderText,
+  value,
+}) {
   const FormInput = styled.input`
     display: flex;
     align-items: center;
@@ -37,6 +42,7 @@ export default function InputBox({ inputType, inputName, placeholderText }) {
       type={inputType}
       name={inputName}
       placeholder={placeholderText}
+      value={value}
     />
   );
 }
