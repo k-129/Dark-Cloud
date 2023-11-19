@@ -5,7 +5,10 @@ import styled from "styled-components";
 
 const InputButton = styled.button`
   @media (max-width: 768px) {
-    background-color: red;
+    width: 90%;
+    height: 6vh;
+    font-size: 4vw;
+    margin: 0vh 2vh 4vh 2vh;
   }
   width: 24vw;
   height: 7vh;
@@ -21,6 +24,12 @@ const InputButton = styled.button`
   }
 `;
 const ButtonText = styled.p`
+  @media (max-width: 768px) {
+    font-size: 4vw;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #f5f5f5;
   font-family: Raleway;
   font-size: 2vw;

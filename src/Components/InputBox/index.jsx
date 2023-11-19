@@ -4,6 +4,18 @@ import React from "react";
 import styled from "styled-components";
 
 const FormInput = styled.input`
+  @media (max-width: 768px) {
+    margin: 0vh 2vh 2vh 2vh;
+    width: 90%;
+    height: 6vh;
+    font-size: 4vw;
+    &::placeholder {
+      padding-bottom: 0vh;
+      color: rgba(245, 245, 245, 0.77);
+      padding-left: 2vh;
+      font-size: 4vw;
+    }
+  }
   display: flex;
   align-items: center;
   justify-content: center;

@@ -16,6 +16,11 @@ import InputBox from "../../Components/InputBox/index";
 import Logo from "../../Components/Logo";
 
 const LoginContainer = styled.div`
+  @media (max-width: 768px) {
+    width: auto;
+    height: auto;
+    margin-top: -12vh;
+  }
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,7 +39,11 @@ const LoginContainer = styled.div`
 `;
 
 const ErrorMessage = styled.p`
-  margin: -16px 0 0 0 !important;
+  @media (max-width: 768px) {
+    margin: -1vh 0 1.5vh 1vh !important;
+    font-size: 2vh;
+  }
+  margin: -1vh 0 1.5vh 1vh !important;
   color: #ce2029;
 `;
 
@@ -65,6 +74,8 @@ export default function LoginForm() {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
+    console.log("Username:", username);
+    console.log("Password:", password);
     setLoginIn(true);
 
     const requestBody = { username, password };
@@ -75,11 +86,19 @@ export default function LoginForm() {
         storeToken(response.data.authToken);
         authenticateUser();
         setLoginIn(false);
-        navigate("/Dashboard");
+        navigate("/");
       })
       .catch((error) => {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          const errorDescription = error.response.data.message;
+          setErrorMessage(errorDescription);
+        } else {
+          setErrorMessage("An unknown error occurred. Please try again.");
+        }
       });
   };
   return (
@@ -87,20 +106,26 @@ export default function LoginForm() {
       <Logo />
       <Form>
         <form onSubmit={handleLoginSubmit}>
-          <InputBox
-            inputType="text"
-            inputName="username"
-            placeholderText="Whom may I address?"
-            value={username}
-            handleFunction={handleUsername}
-          />
-          <InputBox
-            inputType="password"
-            inputName="password"
-            placeholderText="Magical Words"
-            value={password}
-            handleFunction={handlePassword}
-          />
+          <div>
+            <label></label>
+            <InputBox
+              inputType="text"
+              inputName="username"
+              placeholderText="Whom may I address?"
+              value={username}
+              handleFunction={handleUsername}
+            />
+          </div>
+          <div>
+            <label></label>
+            <InputBox
+              inputType="password"
+              inputName="password"
+              placeholderText="Magical Words"
+              value={password}
+              handleFunction={handlePassword}
+            />
+          </div>
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}{" "}
           <InputButton buttonPlaceholder="Login" type="submit" />
         </form>

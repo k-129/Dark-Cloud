@@ -9,6 +9,11 @@ const LogoContainer = styled.div`
   justify-content: center;
 `;
 const LogoImage = styled.img`
+  @media (max-width: 768px) {
+    width: 50vw;
+    margin-top: 2vh;
+    padding-bottom: 1vh;
+  }
   width: 19vw;
 `;
 export default function Logo() {
