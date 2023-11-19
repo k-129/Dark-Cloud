@@ -48,9 +48,11 @@ export default function InputBox({
   placeholderText,
   value,
   handleFunction,
+  id,
 }) {
   return (
     <FormInput
+      id={id}
       type={inputType}
       name={inputName}
       placeholder={placeholderText}

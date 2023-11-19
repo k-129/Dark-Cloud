@@ -62,7 +62,7 @@ export default function LoginForm() {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { storeToken, authenticateUsername } = useContext(AuthContext);
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -74,8 +74,6 @@ export default function LoginForm() {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    console.log("Username:", username);
-    console.log("Password:", password);
     setLoginIn(true);
 
     const requestBody = { username, password };
@@ -84,21 +82,13 @@ export default function LoginForm() {
       .login(requestBody)
       .then((response) => {
         storeToken(response.data.authToken);
-        authenticateUser();
+        authenticateUsername();
         setLoginIn(false);
         navigate("/");
       })
       .catch((error) => {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.message
-        ) {
-          const errorDescription = error.response.data.message;
-          setErrorMessage(errorDescription);
-        } else {
-          setErrorMessage("An unknown error occurred. Please try again.");
-        }
+        const errorDescription = error.response;
+        setErrorMessage(errorDescription);
       });
   };
   return (
@@ -107,27 +97,31 @@ export default function LoginForm() {
       <Form>
         <form onSubmit={handleLoginSubmit}>
           <div>
-            <label></label>
-            <InputBox
-              inputType="text"
-              inputName="username"
-              placeholderText="Whom may I address?"
-              value={username}
-              handleFunction={handleUsername}
-            />
+            <label>
+              <InputBox
+                id="username"
+                inputType="text"
+                inputName="username"
+                placeholderText="Whom may I address?"
+                value={username}
+                handleFunction={handleUsername}
+              />
+            </label>
           </div>
           <div>
-            <label></label>
-            <InputBox
-              inputType="password"
-              inputName="password"
-              placeholderText="Magical Words"
-              value={password}
-              handleFunction={handlePassword}
-            />
+            <label>
+              <InputBox
+                id="password"
+                inputType="password"
+                inputName="password"
+                placeholderText="Magical Words"
+                value={password}
+                handleFunction={handlePassword}
+              />
+            </label>
           </div>
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}{" "}
-          <InputButton buttonPlaceholder="Login" type="submit" />
+          <InputButton buttonPlaceholder="Login" type="button" />
         </form>
       </Form>
     </LoginContainer>

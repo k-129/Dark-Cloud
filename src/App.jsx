@@ -30,7 +30,14 @@ function App() {
             </IsAnon>
           }
         />
-        <Route path="/signup" element={<SignUpPage />} />
+        <Route
+          path="/signup"
+          element={
+            <IsAnon>
+              <SignUpPage />
+            </IsAnon>
+          }
+        />
       </Routes>
     </div>
   );

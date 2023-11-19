@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../Context/auth.context";
 
 function IsPrivate({ children }) {
-  const { isLoggedIn, isLoading, user } = useContext(AuthContext);
+  const { isLoggedIn, isLoading } = useContext(AuthContext);
 
   // if authentication is loading
   if (isLoading) return <p>Loading ... </p>;
