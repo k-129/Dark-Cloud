@@ -4,7 +4,7 @@ class AuthService {
   constructor() {
     // Create a new instance of axios with a custom configuration
     this.api = axios.create({
-      baseURL: import.meta.env.VITE_REACT_APP_API_URL,
+      baseURL: `${import.meta.env.VITE_REACT_APP_API_URL}`, //import.meta.env.VITE_REACT_APP_API_URL,
       // We set our API's base URL so that all requests use the same base URL
     });
 

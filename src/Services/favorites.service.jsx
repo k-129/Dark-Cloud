@@ -5,7 +5,7 @@ import axios from 'axios';
 class FavService {
   constructor() {
     this.api = axios.create({
-      baseURL: import.meta.env.VITE_REACT_APP_API_URL 
+      baseURL: `${import.meta.env.VITE_REACT_APP_API_URL}`//import.meta.env.VITE_REACT_APP_API_URL 
     });
 
     // Automatically set JWT token in the headers for every request

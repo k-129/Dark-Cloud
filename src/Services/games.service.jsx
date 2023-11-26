@@ -1,17 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
 
 /* Axios Service that deals with Project Requests */
 
 class GamesService {
   constructor() {
     this.api = axios.create({
-      baseURL: import.meta.env.VITE_REACT_APP_API_URL 
+      baseURL: `${import.meta.env.VITE_REACT_APP_API_URL}`, //import.meta.env.VITE_REACT_APP_API_URL
     });
 
     // Automatically set JWT token in the headers for every request
-    this.api.interceptors.request.use(config => {
+    this.api.interceptors.request.use((config) => {
       // Retrieve the JWT token from the local storage
-      const storedToken = localStorage.getItem('authToken');
+      const storedToken = localStorage.getItem("authToken");
 
       if (storedToken) {
         config.headers = { Authorization: `Bearer ${storedToken}` };
@@ -22,28 +22,27 @@ class GamesService {
   }
 
   // POST /api/games
-  createGame = requestBody => {
-    return this.api.post('/api/add-game', requestBody);
+  createGame = (requestBody) => {
+    return this.api.post("/api/add-game", requestBody);
   };
 
   // GET /api/games
   getAllGames = () => {
-    return this.api.get('/api/games');
+    return this.api.get("/api/games");
   };
 
   // GET /api/games/:id
-  getGame = id => {
+  getGame = (id) => {
     return this.api.get(`/api/games/${id}`);
   };
 
-
-  // PUT 
+  // PUT
   updateGame = (id, requestBody) => {
     return this.api.put(`/api/games/edit/${id}`, requestBody);
   };
 
   // DELETE /api/games/:id
-  deleteGame = id => {
+  deleteGame = (id) => {
     return this.api.delete(`/api/games/${id}`);
   };
 }
